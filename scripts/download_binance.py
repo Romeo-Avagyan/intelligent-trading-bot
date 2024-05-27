@@ -1,22 +1,16 @@
 # IMPORTS
-import pandas as pd
-import math
-import os.path
 import json
+import os.path
 import time
-from datetime import timedelta, datetime
-from dateutil import parser
-from tqdm import tqdm_notebook #(Optional, used for progress-bars)
+from datetime import datetime
+
 import click
-
-#import aiohttp
-import asyncio
-
+import pandas as pd
 from binance.client import Client
-from binance.streams import BinanceSocketManager
 from binance.enums import *
+from binance.streams import BinanceSocketManager
 
-from common.utils import klines_to_df, binance_freq_from_pandas
+from common.utils import binance_freq_from_pandas, klines_to_df
 from service.App import *
 
 """
@@ -204,8 +198,8 @@ async def get_futures_klines_all(symbol, freq, save = False):
     #[linux]$ echo -n "symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantüity=1&price=0.1&recvWindow=5000&timestamp=1499827319559" | openssl dgst -sha256 -hmac "API-secret"
     #(stdin)= c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71 - signature
 
-    import hmac
     import hashlib
+    import hmac
     import urllib.parse
 
     headers = {"X-MBX-APIKEY": binance_api_key}
