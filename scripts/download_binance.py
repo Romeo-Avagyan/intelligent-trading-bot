@@ -99,7 +99,7 @@ def main(config_file):
         file_path = data_path / quote
         file_path.mkdir(parents=True, exist_ok=True)  # Ensure that folder exists
 
-        file_name = (file_path / ("futures" if data_source_type == HistoricalKlinesType.FUTURES else "klines")).with_suffix(".csv")
+        file_name = ds.get("file").with_suffix(".csv")
 
         # Get a few latest klines to determine the latest available timestamp
         latest_klines = App.client.get_klines(symbol=quote, interval=binance_freq, limit=5)
