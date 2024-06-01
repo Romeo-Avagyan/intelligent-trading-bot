@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 import os
+import time
 
 import click
 import pandas as pd
@@ -178,6 +179,9 @@ def get_binance_historical_klines(symbol, interval, start_str, klines_type, df, 
 
         if (more_data_to_fetch):
             start_point_dt = end_dt - timedelta(days=1)
+
+        # This is done to not pass the Binance API limits
+        time.sleep(30)
 
     # Remove last row because it represents a non-complete kline (the interval not finished yet)
     df = df.iloc[:-1]
